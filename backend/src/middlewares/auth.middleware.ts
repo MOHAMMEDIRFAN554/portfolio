@@ -18,7 +18,9 @@ export function authMiddleware() {
     const token = req.cookies?.accessToken;
 
     if (!token) {
-      console.warn(`Unauthorized access attempt to ${req.originalUrl} - No token provided`);
+      if (req.method !== 'OPTIONS') {
+        console.warn(`Unauthorized access attempt to ${req.originalUrl} - No token provided in cookies. Cookies present: ${Object.keys(req.cookies).join(', ')}`);
+      }
       return res.status(401).json({ error: 'Unauthorized: No token provided' });
     }
 

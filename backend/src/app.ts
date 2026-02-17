@@ -14,6 +14,7 @@ export function createApp(config: AppConfig): express.Application {
   const app = express();
 
   app.set('config', config);
+  app.set('trust proxy', 1);
 
   app.use(helmet());
   app.use(cors({
