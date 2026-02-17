@@ -17,7 +17,15 @@ export function createApp(config: AppConfig): express.Application {
 
   app.use(helmet());
   app.use(cors({
-    origin: config.frontendUrl,
+    origin: (origin, callback) => {
+      const allowedOrigins = config.frontendUrl.split(',').map(url => url.trim().replace(/\/$/, ''));
+      if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes(origin.replace(/\/$/, ''))) {
+        callback(null, true);
+      } else {
+        console.warn(`Blocked CORS request from origin: ${origin}`);
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true
   }));
   app.use(express.json({ limit: '10mb' }));
