@@ -7,8 +7,6 @@ export interface AppConfig {
   jwtAccessExpiry: string;
   jwtRefreshExpiry: string;
   mongodbUri: string;
-  adminEmail: string;
-  adminPassword: string;
   smtp: {
     host: string;
     port: number;
@@ -24,8 +22,7 @@ export function validateConfig(): AppConfig {
     'JWT_ACCESS_SECRET',
     'JWT_REFRESH_SECRET',
     'FRONTEND_URL',
-    'ADMIN_EMAIL',
-    'ADMIN_PASSWORD',
+    'FRONTEND_URL',
     'SMTP_HOST',
     'SMTP_USER',
     'SMTP_PASS'
@@ -45,8 +42,6 @@ export function validateConfig(): AppConfig {
     jwtAccessExpiry: process.env.JWT_ACCESS_EXPIRY || '15m',
     jwtRefreshExpiry: process.env.JWT_REFRESH_EXPIRY || '7d',
     mongodbUri: process.env.MONGODB_URI!,
-    adminEmail: process.env.ADMIN_EMAIL!,
-    adminPassword: process.env.ADMIN_PASSWORD!,
     smtp: {
       host: process.env.SMTP_HOST!,
       port: parseInt(process.env.SMTP_PORT || '587', 10),

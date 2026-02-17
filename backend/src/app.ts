@@ -18,7 +18,11 @@ export function createApp(config: AppConfig): express.Application {
   app.use(helmet());
   app.use(cors({
     origin: (origin, callback) => {
-      const allowedOrigins = config.frontendUrl.split(',').map(url => url.trim().replace(/\/$/, ''));
+      const allowedOrigins = [
+        ...config.frontendUrl.split(',').map(url => url.trim().replace(/\/$/, '')),
+        'https://portfolio-ruby-seven-59.vercel.app'
+      ];
+
       if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes(origin.replace(/\/$/, ''))) {
         callback(null, true);
       } else {
