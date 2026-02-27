@@ -21,7 +21,8 @@ export function createApp(config: AppConfig): express.Application {
     origin: (origin, callback) => {
       const allowedOrigins = [
         ...config.frontendUrl.split(',').map(url => url.trim().replace(/\/$/, '')),
-        'https://portfolio-ruby-seven-59.vercel.app'
+        'https://portfolio-ruby-seven-59.vercel.app',
+        'https://portfolio-mohammedirfan.vercel.app'
       ];
 
       if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes(origin.replace(/\/$/, ''))) {
