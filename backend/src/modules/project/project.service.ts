@@ -19,7 +19,7 @@ export interface CreateProjectInput {
   techStack: { name: string; icon: string }[];
   githubUrl?: string;
   liveUrl?: string;
-  images: string[];
+  images?: string[];
   featured?: boolean;
   status?: 'published' | 'draft';
 }

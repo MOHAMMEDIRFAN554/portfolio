@@ -48,9 +48,9 @@ import { toast } from 'sonner';
 const projectSchema = z.object({
     title: z.string().min(3, 'Title must be at least 3 characters'),
     slug: z.string().min(3, 'Slug must be at least 3 characters'),
-    shortDescription: z.string().min(10, 'Short description must be at least 10 characters'),
+    shortDescription: z.string().optional().or(z.literal('')),
     fullDescription: z.string().optional().or(z.literal('')),
-    overview: z.string().min(20, 'Overview must be at least 20 characters'),
+    overview: z.string().optional().or(z.literal('')),
     problemStatement: z.string().optional().or(z.literal('')),
     solutionApproach: z.string().optional().or(z.literal('')),
     architectureDetails: z.string().optional().or(z.literal('')),
@@ -64,7 +64,7 @@ const projectSchema = z.object({
         name: z.string().min(1),
         icon: z.string().min(1)
     })).min(1, 'Add at least one technology'),
-    images: z.array(z.string()).min(1, 'Add at least one image URL'),
+    images: z.array(z.string()).optional().default([]),
     githubUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
     liveUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
     featured: z.boolean().default(false),

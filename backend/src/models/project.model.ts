@@ -3,10 +3,10 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface IProject extends Document {
   title: string;
   slug: string;
-  shortDescription: string;
+  shortDescription?: string;
   projectType: 'case-study' | 'basic';
 
-  overview: string;
+  overview?: string;
   problemStatement?: string;
   solutionApproach?: string;
   architectureDetails?: string;
@@ -36,10 +36,10 @@ const projectSchema = new Schema<IProject>(
   {
     title: { type: String, required: true },
     slug: { type: String, required: true, unique: true, lowercase: true },
-    shortDescription: { type: String, required: true },
+    shortDescription: { type: String },
     projectType: { type: String, enum: ['case-study', 'basic'], default: 'basic' },
 
-    overview: { type: String, required: true },
+    overview: { type: String },
     problemStatement: { type: String },
     solutionApproach: { type: String },
     architectureDetails: { type: String },
